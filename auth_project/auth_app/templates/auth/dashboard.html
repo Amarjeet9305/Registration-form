@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Registration Form{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        {% if profile.photo %}
+                            <img src="{{ profile.photo.url }}" alt="Profile Photo" class="profile-photo mb-3">
+                        {% else %}
+                            <i class="bi bi-person-circle" style="font-size: 5rem; color: #667eea;"></i>
+                        {% endif %}
+                        <h2>Welcome, {{ user.get_full_name|default:user.username }}!</h2>
+                        <p class="text-muted">{{ user.email }}</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5><i class="bi bi-person"></i> Profile Status</h5>
+                                    <p class="mb-0">
+                                        {% if profile.email_verified %}
+                                            <span class="badge bg-success">Email Verified</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Email Not Verified</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card bg-info text-white">
+                                <div class="card-body">
+                                    <h5><i class="bi bi-shield-check"></i> Role</h5>
+                                    <p class="mb-0">
+                                        <span class="badge bg-light text-dark">{{ profile.get_role_display }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5><i class="bi bi-info-circle"></i> Account Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Username:</strong> {{ user.username }}</p>
+                            <p><strong>Email:</strong> {{ user.email }}</p>
+                            <p><strong>Phone:</strong> {{ profile.phone|default:"Not provided" }}</p>
+                            <p><strong>Member Since:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'profile' %}" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i> Edit Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

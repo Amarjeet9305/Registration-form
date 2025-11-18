@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Registration Form{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-person-gear"></i> Edit Profile</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="text-center mb-4">
+                            {% if profile.photo %}
+                                <img src="{{ profile.photo.url }}" alt="Profile Photo" class="profile-photo mb-3">
+                            {% else %}
+                                <i class="bi bi-person-circle" style="font-size: 5rem; color: #667eea;"></i>
+                            {% endif %}
+                        </div>
+
+                        <h5>Personal Information</h5>
+                        <hr>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="id_first_name" class="form-label">First Name</label>
+                                {{ user_form.first_name }}
+                                {% if user_form.first_name.errors %}
+                                    <div class="text-danger small">{{ user_form.first_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_last_name" class="form-label">Last Name</label>
+                                {{ user_form.last_name }}
+                                {% if user_form.last_name.errors %}
+                                    <div class="text-danger small">{{ user_form.last_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email</label>
+                            {{ user_form.email }}
+                            {% if user_form.email.errors %}
+                                <div class="text-danger small">{{ user_form.email.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <h5 class="mt-4">Profile Details</h5>
+                        <hr>
+
+                        <div class="mb-3">
+                            <label for="id_phone" class="form-label">Phone</label>
+                            {{ profile_form.phone }}
+                            {% if profile_form.phone.errors %}
+                                <div class="text-danger small">{{ profile_form.phone.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_photo" class="form-label">Profile Photo</label>
+                            {{ profile_form.photo }}
+                            {% if profile_form.photo.errors %}
+                                <div class="text-danger small">{{ profile_form.photo.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_role" class="form-label">Role</label>
+                            {{ profile_form.role }}
+                            {% if profile_form.role.errors %}
+                                <div class="text-danger small">{{ profile_form.role.errors }}</div>
+                            {% endif %}
+                            <small class="text-muted">Note: Role changes may require admin approval</small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Update Profile
+                            </button>
+                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Back to Dashboard
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
