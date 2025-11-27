@@ -519,8 +519,9 @@ The project successfully implements all required features:
 
 ---
 
-**Project Developed By**: [Your Name]  
+**Project Developed By**: Amarjeet  
 **Date**: 2024  
 **Framework**: Django 4.2.7  
 **License**: MIT
+
 
